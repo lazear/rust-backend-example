@@ -1,0 +1,6 @@
+[package]
+name = "rust-backend-example"
+version = "0.1.0"
+authors = ["Michael Lazear @lazear"]
+
+[dependencies]
