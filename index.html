@@ -1,47 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-    <style>
-        p.top {
-            font-family: Arial, Helvetica, sans-serif;
-            text-align: center;
-            margin-top: 50px;
-        }
-        p {
-            font-family: Arial, Helvetica, sans-serif;
-            text-align: center;
-            margin: 10px;
-        }
-    </style>
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Document</title>
+        <link rel="stylesheet" href="styles.css">
     </head>
-    <p class="top"> Visitor counter powered by <a href="https://www.rust-lang.org/en-US/">Rust</a></p>
-    <p id="div">You have visited this page: 1 time</p>
-
-    <script type="text/javascript">
-        function request(url) {
-            var xmlhttp = new XMLHttpRequest();
-        
-            xmlhttp.onreadystatechange = function() {
-                console.log("Sending request to backend");
-                if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
-                    if (xmlhttp.status == 200) {
-                        response = JSON.parse(xmlhttp.responseText);
-                        document.getElementById("div").innerHTML = "You have visited this page: " + response["requests"] + " times";
-                    }
-                    else {
-                        document.getElementById("div").innerHTML = "Error connecting to backend";
-                    }
-                }
-            };
-
-            xmlhttp.open("GET", url, true);
-            xmlhttp.send();
-        }
-        request("http://127.0.0.1:8080");
-    </script>
     <body>
+        <p class="top"> Visitor counter powered by <a href="https://www.rust-lang.org/en-US/">Rust</a></p>
+        <p id="div">You have visited this page: 1 time</p>
+        <script src="ajax.js"></script>
+        <script>request("http://127.0.0.1:8080");</script>
+    </body>
 </html>
