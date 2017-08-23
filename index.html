@@ -11,6 +11,13 @@
         <p class="top"> Visitor counter powered by <a href="https://www.rust-lang.org/en-US/">Rust</a></p>
         <p id="div">You have visited this page: 1 time</p>
         <script src="ajax.js"></script>
-        <script>request("http://127.0.0.1:8080");</script>
+        <script>getjson("http://127.0.0.1:8080", 
+            function(response) {
+                if (response) {
+                    document.getElementById("div").innerHTML = "You have visited this page: " + response["requests"] + " times";
+                } else {
+                    document.getElementById("div").innerHTML = "Error connecting to backend";
+                }
+            });</script>
     </body>
 </html>

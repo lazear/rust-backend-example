@@ -19,10 +19,10 @@ fn handle_connection(mut stream: TcpStream, dict: Arc<Mutex<HashMap<IpAddr, u32>
 		write!(&mut stream, 
 			"HTTP/1.1 200 OK\r\n\
 			Server: rustHTTP/0.1.0\r\n\
-			Content-Type: text/html; charset=utf-8\r\n\
+			Content-Type: application/json; charset=utf-8\r\n\
 			Access-Control-Allow-Origin: *\r\n\
 			Access-Control-Allow-Credentials: true\r\n\r\n")?;
-		write!(&stream, "\r\n{{\"requests\": {}}}", visits)?;
+		write!(&stream, "{{\"requests\": {}}}", visits)?;
 	}
     stream.flush()
 }
