@@ -3,6 +3,7 @@
 This is an extremely simple, dependency free example of how Rust can be used as a backend in web development.
 
 A simple HTTP server is spawned that serves files from the directory it is running in. A separate thread is spawned for each request.
+
 The server also listens to requests on port 8080 that logs the number of requests from different clients, and returns the number of requests as a JSON object `{"requests": 2}`. 
 
 This allows for AJAX calls to communicate with the backend.
