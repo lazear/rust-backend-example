@@ -9,9 +9,7 @@ var $http = {
                 } else {
                     reject(req.statusText);
                 }
-
             }
-
             req.onerror = function() {
                 reject(Error("Network Error"));
             }

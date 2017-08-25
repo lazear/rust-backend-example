@@ -1,10 +1,26 @@
 p.top {
-    /* font-family: Arial, Helvetica, sans-serif;
-    text-align: center; */
-    margin-top: 50px;
+    padding-top: 10px;
 }
+
 p {
     font-family: Arial, Helvetica, sans-serif;
     text-align: center;
     margin: 10px;
+}
+
+footer {
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    font-size: 12px;
+    margin-top: 50px;
+
+}
+
+.content {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 200;
+    margin: auto;
+    margin-top: 125px;
+    
 }

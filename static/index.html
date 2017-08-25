@@ -8,16 +8,24 @@
         <link rel="stylesheet" type="text/css" href="styles.css">
     </head>
     <body>
-        <p class="top"> Visitor counter powered by <a href="https://www.rust-lang.org/en-US/">Rust</a></p>
-        <p id="div">You have visited this page: 1 time</p>
+        <a href="https://github.com/lazear/rust-backend-example"><img style="position: absolute; top: 0; right: 0; border: 0;" src="forkme.png" alt="Fork me on GitHub"></a>
+        <div class="content">
+            <p class="top"> Visitor counter powered by <a href="https://www.rust-lang.org/">Rust</a></p>
+            <a href="https://www.rust-lang.org/"><img src="rustlogo.svg"></a>
+            <p id="div">You have visited this page: 1 time</p>
+
+            
+        </div>
+        <footer><a href="https://github.com/lazear/">Michael Lazear</a> (C) 2017. Released under the MIT License</footer>
         <script src="http.js"></script>
         <script>
-        $http.get("/api").then(function(response) {
-                    response = JSON.parse(response);
-                    document.getElementById("div").innerHTML = "You have visited this page: " + response.requests + " times";
-                }, function(error) {
-                    document.getElementById("div").innerHTML = "Error connecting to backend";
-                });
+        $http.get("/api")
+            .then(function(response) {
+                response = JSON.parse(response);
+                document.getElementById("div").innerHTML = "You have visited this page: " + response.requests + " times";
+            }, function(error) {
+                document.getElementById("div").innerHTML = "Error connecting to backend";
+            });
         </script>
     </body>
 </html>
