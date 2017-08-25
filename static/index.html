@@ -5,14 +5,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Document</title>
-        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" type="text/css" href="styles.css">
     </head>
     <body>
         <p class="top"> Visitor counter powered by <a href="https://www.rust-lang.org/en-US/">Rust</a></p>
         <p id="div">You have visited this page: 1 time</p>
-        <script src="ajax.js"></script>
+        <script src="http.js"></script>
         <script>
-        $http.get("http://127.0.0.1:8080").then(function(response) {
+        $http.get("/api").then(function(response) {
                     response = JSON.parse(response);
                     document.getElementById("div").innerHTML = "You have visited this page: " + response.requests + " times";
                 }, function(error) {
