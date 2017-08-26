@@ -7,8 +7,20 @@ use std::collections::HashMap;
 fn handle_connection(mut stream: TcpStream, dict: Arc<Mutex<HashMap<IpAddr, u32>>>) -> std::io::Result<()> {
 	let mut s  = [0; 512];
 	stream.read(&mut s)?;
+	let s = String::from_utf8_lossy(&s);
+	let mut s = s.lines();
+	let mut ip = stream.peer_addr().unwrap().ip();
+	while let Some(line) = s.next() {
+		let mut header = line.split(":");
+		let (key, val) = (header.next(), header.next());
+		match (key, val) {
+			(Some("X-Forwarded-For"), Some(addr)) => {
+				ip = String::from(addr.trim_left().trim_right()).parse().unwrap_or(ip);
+			},
+			_ => (),
+		};
+	}
 
-	let ip = stream.peer_addr().unwrap().ip();
 	let lock = dict.lock();
 	if let Ok(mut map) = lock {
 		*map.entry(ip).or_insert(1) += 1;
@@ -19,7 +31,7 @@ fn handle_connection(mut stream: TcpStream, dict: Arc<Mutex<HashMap<IpAddr, u32>
 			"HTTP/1.1 200 OK\r\n\
 			Server: rustHTTP/0.1.0\r\n\
 			Content-Type: application/json; charset=utf-8\r\n\r\n")?;
-		write!(&stream, "{{\"requests\": {}}}", visits)?;
+		write!(&stream, "{{\"requests\": {}, \"address\": \"{}\"}}", visits, ip)?;
 	}
     stream.flush()
 }
